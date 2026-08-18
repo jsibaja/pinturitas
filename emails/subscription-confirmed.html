@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tu suscripción está activa</title>
+    <style>
+      body { margin: 0; padding: 0; background: #FFF6EE; font-family: "Nunito", Helvetica, Arial, sans-serif; color: #2A2118; }
+      .wrap { padding: 32px 16px; }
+      .card { max-width: 600px; margin: 0 auto; background: #FFFFFF; border: 1px solid #F0E2D4; border-radius: 20px; padding: 40px 32px; }
+      h1 { font-family: "Fredoka", Georgia, serif; color: #17B8B0; margin: 0 0 16px; font-size: 28px; }
+      p { line-height: 1.6; margin: 0 0 16px; font-size: 16px; }
+      .info { background: #F7EFE6; border-radius: 16px; padding: 16px 20px; margin: 16px 0; }
+      .cta { display: inline-block; background: #FF7A3D; color: #FFFFFF !important; text-decoration: none; padding: 16px 28px; border-radius: 16px; font-weight: 700; margin: 16px 0; }
+      .foot { text-align: center; color: #7A6A5C; font-size: 12px; padding: 16px; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="card">
+        <h1>¡Suscripción activa, {{display_name}}!</h1>
+        <p>Ya tienes acceso completo a todos los mundos, láminas y juegos de Pinturitas.</p>
+        <div class="info">
+          <strong>Plan:</strong> {{plan_name}}<br/>
+          <strong>Próxima renovación:</strong> {{renews_at}}
+        </div>
+        <p style="text-align:center;">
+          <a class="cta" href="https://pinturitas.app/mundos">Explorar todos los mundos</a>
+        </p>
+        <p>Gracias por confiar en nosotros para acompañar a tu peque.</p>
+        <p>Un abrazo,<br/>El equipo de Pinturitas</p>
+      </div>
+      <p class="foot">Puedes gestionar tu suscripción desde la Zona de Padres.</p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ficha técnica — Pinturitas</title>
+<style>
+  @page{margin:14mm 12mm}
+  body{font-family:Calibri,'Segoe UI',Arial,sans-serif;max-width:780px;margin:0 auto;padding:0 20px;color:#2A2118;line-height:1.55}
+  h1{font-size:30px;color:#C2410C;border-bottom:3px solid #FF7A3D;padding-bottom:10px;margin-top:8px}
+  h2{font-size:19px;color:#C2410C;margin-top:22px;background:#FFF1E8;padding:9px 14px;border-radius:8px;border-left:5px solid #FF7A3D;page-break-after:avoid}
+  .intro{font-size:17px;color:#44372c}
+  table{border-collapse:collapse;width:100%;margin:10px 0;page-break-inside:auto}
+  th,td{border:1px solid #E7D9CB;padding:8px 11px;text-align:left;vertical-align:top}
+  th{background:#FFF1E8;width:34%;color:#7C2D12}
+  ul{padding-left:22px;margin:6px 0}
+  li{margin:5px 0}
+  .chips{line-height:2.2}
+  .chip{display:inline-block;background:#FFF1E8;border:1px solid #FFC3A0;color:#9A3412;border-radius:999px;padding:4px 12px;margin:3px 4px;font-size:14px;font-weight:600}
+  .chip.t{background:#E6F7F6;border-color:#8FDCD8;color:#0F766E}
+  .resumen{background:#FFF1E8;border:1px solid #FFC3A0;border-radius:10px;padding:16px 20px;margin-top:26px;font-size:16px;page-break-inside:avoid}
+  .cifras{display:flex;gap:10px;margin:18px 0;page-break-inside:avoid}
+  .cifra{flex:1;text-align:center;background:#E6F7F6;border:1px solid #8FDCD8;border-radius:10px;padding:12px 6px}
+  .cifra b{display:block;font-size:26px;color:#0F766E;line-height:1.1}
+  .cifra span{font-size:13px;color:#44372c}
+  strong{color:#1a140f}
+  footer.brand{margin-top:32px;padding-top:14px;border-top:1px solid #E7D9CB;text-align:center;font-size:13px;color:#94a3b8}
+  footer.brand a{color:#FF7A3D;text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+
+<h1>Ficha técnica — Pinturitas</h1>
+
+<h2>De qué trata y para quién</h2>
+<p class="intro"><strong>Pinturitas</strong> es una app web para <strong>colorear y aprender
+inglés</strong>: el niño pinta con el dedo y, al hacerlo, escucha y aprende la palabra en inglés
+de lo que está coloreando. Incluye <strong>634 láminas en 33 mundos</strong>, cada una con su
+nombre en inglés, en español y la pronunciación escrita. Se instala como app en el celular (PWA).</p>
+
+<div class="cifras">
+  <div class="cifra"><b>33</b><span>mundos</span></div>
+  <div class="cifra"><b>634</b><span>láminas</span></div>
+  <div class="cifra"><b>634</b><span>palabras en inglés</span></div>
+  <div class="cifra"><b>3 a 7</b><span>años</span></div>
+</div>
+
+<table>
+  <tbody>
+    <tr><th>¿Para quién es?</th><td>Para <strong>padres de niños de 3 a 7 años</strong> que quieren
+      que su hijo empiece el inglés temprano <strong>sin clases ni presión</strong>, y que el tiempo
+      de pantalla deje de ser tiempo perdido. Ideal para quien busca una actividad tranquila,
+      educativa y sin anuncios.</td></tr>
+    <tr><th>¿Qué va a lograr?</th><td>Que el niño adquiera <strong>vocabulario en inglés jugando</strong>,
+      a la edad en la que el oído absorbe los idiomas con más facilidad. De paso desarrolla
+      <strong>motricidad fina, concentración y creatividad</strong>, y el papá ve su avance.</td></tr>
+    <tr><th>¿Cómo lo logra?</th><td>
+      <ul>
+        <li><strong>Colorear con el dedo</strong> → el color nunca se sale de la línea, así que no hay frustración.</li>
+        <li><strong>Cada dibujo dice su palabra</strong> en inglés y español, con pronunciación escrita para que el papá también la diga.</li>
+        <li><strong>La paleta también habla</strong> → aprende los colores mientras pinta.</li>
+        <li><strong>5 mini-juegos</strong> que repasan las palabras aprendidas, sin que se sienta tarea.</li>
+        <li><strong>Galería de sus obras</strong> → ve lo que ha logrado y quiere volver.</li>
+        <li><strong>Zona de padres</strong> con progreso, ajustes y suscripción, detrás de una puerta con una operación matemática.</li>
+      </ul>
+    </td></tr>
+  </tbody>
+</table>
+
+<p class="intro">Y aquí te contamos, en simple, con qué está hecho este sistema y qué tiene por
+dentro. No necesitas saber programar para usarlo: es un libro de colorear digital por suscripción,
+creado con tecnologías modernas, estándar y profesionales.</p>
+
+<h2>¿Con qué está construido?</h2>
+<table>
+  <tbody>
+    <tr><th>La aplicación (lo que ves)</th><td><strong>TanStack Start + React 19 + Vite</strong> — un framework moderno de React con renderizado en el servidor: carga rápido, fluido y bien posicionado en buscadores.</td></tr>
+    <tr><th>El diseño</th><td><strong>Tailwind CSS v4 + shadcn/ui</strong> — componentes de aspecto profesional, con modo claro y oscuro. Se ve bien en celular, tablet y computadora, y se puede <strong>instalar como app (PWA)</strong>.</td></tr>
+    <tr><th>El lenguaje</th><td><strong>TypeScript</strong> — es como JavaScript, pero más seguro: ayuda a evitar errores.</td></tr>
+    <tr><th>El motor de coloreo</th><td>Lienzo propio con <strong>relleno por toque</strong> (tocas una zona y se pinta), <strong>pincel libre con el dedo</strong>, borrador y deshacer. Pensado para dedos pequeños: botones grandes y sin gestos difíciles.</td></tr>
+    <tr><th>El audio</th><td>Usa la <strong>voz del propio dispositivo</strong> (inglés y español). No depende de servicios externos, así que <strong>no genera costos por uso</strong> ni consume datos.</td></tr>
+    <tr><th>La base de datos y las cuentas</th><td><strong>Supabase</strong> — base de datos profesional en la nube (PostgreSQL), con sistema de usuarios/login y almacenamiento incluidos. Lo mejor: es <strong>tu</strong> base, tus láminas y tus clientes son tuyos.</td></tr>
+    <tr><th>El contenido protegido</th><td>Las láminas se entregan <strong>con seguridad por filas (RLS)</strong>: cada cuenta solo ve lo suyo y solo acceden quienes tienen un plan activo.</td></tr>
+    <tr><th>La publicación</th><td>Puedes publicarla en <strong>Lovable</strong> (lo más fácil, con un clic) o en <strong>cualquier otro hosting</strong> que prefieras — al ser código estándar, no quedas atado a una sola plataforma.</td></tr>
+  </tbody>
+</table>
+
+<h2>Lo que hace bien (por dentro)</h2>
+<ul>
+  <li>🎨 <strong>634 láminas en 33 mundos:</strong> animales, números, colores, el cuerpo, la comida, la casa, profesiones, la ciudad y más. <strong>Ninguna palabra se repite.</strong></li>
+  <li>🗣️ <strong>Bilingüe y hablado:</strong> cada dibujo y cada color se pronuncian en inglés, con el nombre en español y la pronunciación escrita.</li>
+  <li>🖍️ <strong>Más de 200 tonos:</strong> 24 colores base (incluye tonos de piel) y 9 matices de cada uno, del pastel al oscuro.</li>
+  <li>🎮 <strong>5 juegos de vocabulario</strong> que repasan lo aprendido coloreando.</li>
+  <li>👧 <strong>Hasta 4 perfiles de niño</strong> por cuenta, cada uno con su progreso y su galería.</li>
+  <li>🔒 <strong>Zona de padres protegida:</strong> el niño nunca ve pagos ni anuncios; el muro de pago vive detrás de una puerta para adultos.</li>
+  <li>💳 <strong>Suscripciones por planes:</strong> mensual y anual, con activación y desactivación de acceso (útil para pagos por transferencia).</li>
+  <li>👤 <strong>Roles y permisos:</strong> dueño (owner), administrador y usuario — solo se gestionan cuentas de rango inferior, así ningún administrador puede dejarse fuera.</li>
+  <li>🛠️ <strong>Panel de administración:</strong> estadísticas, buscador, suscriptores, planes y roles; crea, edita y elimina cuentas sin tocar la base de datos.</li>
+  <li>📱 <strong>Responsive + instalable:</strong> funciona igual en celular, tablet y computadora, y lo ya visitado queda disponible sin internet.</li>
+  <li>⚖️ <strong>Contenido 100 % original:</strong> sin personajes con licencia, así que no hay riesgo legal al vender.</li>
+  <li>🚀 <strong>Portable y de tu propiedad:</strong> es código estándar; puedes llevarlo a otro lado cuando quieras. Incluye un <strong>kit de instalación</strong> para clonar todo el backend.</li>
+</ul>
+
+<h2>Módulos incluidos</h2>
+<div class="chips">
+  <span class="chip">Catálogo de láminas (634)</span>
+  <span class="chip">33 mundos</span>
+  <span class="chip">Estudio de coloreo</span>
+  <span class="chip">Paleta hablada (24 colores)</span>
+  <span class="chip">Selector de tonos</span>
+  <span class="chip">Audio en inglés y español</span>
+  <span class="chip t">5 juegos de vocabulario</span>
+  <span class="chip t">Galería de obras</span>
+  <span class="chip t">Progreso por niño</span>
+  <span class="chip t">Perfiles de niño (hasta 4)</span>
+  <span class="chip">Zona de padres</span>
+  <span class="chip">Suscriptores y planes</span>
+  <span class="chip">Panel de administración</span>
+  <span class="chip">Usuarios y roles</span>
+  <span class="chip">Cuentas y login</span>
+  <span class="chip t">Modo claro y oscuro</span>
+  <span class="chip t">PWA instalable</span>
+  <span class="chip t">Página de ventas</span>
+</div>
+
+<h2>Listo para conectar</h2>
+<table>
+  <tbody>
+    <tr><th>Pagos</th><td>La estructura de <strong>suscripciones y eventos de pago</strong> ya está creada y el panel permite activar o desactivar accesos a mano. Falta enlazar la pasarela (Hotmart) para que se active sola al comprar.</td></tr>
+    <tr><th>Correos</th><td>Las <strong>plantillas de correo</strong> (bienvenida, suscripción confirmada, recuperar contraseña, aviso de renovación y vencimiento) están incluidas, listas para conectar el proveedor de envío.</td></tr>
+  </tbody>
+</table>
+
+<div class="resumen">
+  <strong>En resumen:</strong> un SaaS moderno, seguro y profesional para <strong>aprender inglés
+  coloreando</strong>, hecho con tecnologías estándar y <strong>de tu propiedad</strong>. Tú
+  controlas tu base de datos, tu contenido y tus clientes.
+</div>
+
+<footer class="brand">Creado con <a href="https://plrsfactory.com">plrsfactory.com</a></footer>
+
+</body>
+</html>

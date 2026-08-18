@@ -1,0 +1,17 @@
+{
+  "name": "Pinturitas",
+  "short_name": "Pinturitas",
+  "description": "Libro para colorear digital que ense\u00f1a ingl\u00e9s a ni\u00f1os de 3 a 6 a\u00f1os.",
+  "lang": "es",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FFF6EE",
+  "theme_color": "#FF7A3D",
+  "categories": ["education", "kids", "entertainment"],
+  "icons": [
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
