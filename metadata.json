@@ -1,0 +1,6 @@
+{
+  "name": "Pinturitas",
+  "description": "Libro para colorear digital que enseña vocabulario en inglés a niños de 3 a 7 años.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
