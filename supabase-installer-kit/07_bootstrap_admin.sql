@@ -11,7 +11,7 @@
 insert into public.user_roles (user_id, role)
 select id, 'owner'::public.app_role
 from auth.users
-where email = 'cambia-esto@tu-dominio.com'
+where email = 'jsibaja@gmail.com'
 on conflict (user_id, role) do nothing;
 
 -- OPCIÓN B: nombra owner a la primera cuenta creada (útil al clonar el
