@@ -42,7 +42,67 @@ function shuffle<T>(arr: T[]): T[] {
 }
 const pick = <T,>(arr: T[], n: number) => shuffle(arr).slice(0, n);
 const ANIMAL_RE = /^line-art\/(pets|farm|wild|forest|ocean|flying|bugs)\//;
-const silUrl = (d: Drawing) => assetUrl((d.line_art_path ?? "").replace("line-art/", "silhouettes/"));
+
+const AVAILABLE_SILHOUETTES = new Set([
+  "silhouettes/bugs/ant.png",
+  "silhouettes/bugs/bee.png",
+  "silhouettes/bugs/beetle.png",
+  "silhouettes/bugs/butterfly.png",
+  "silhouettes/bugs/ladybug.png",
+  "silhouettes/bugs/snail.png",
+  "silhouettes/bugs/spider.png",
+  "silhouettes/farm/cow.png",
+  "silhouettes/farm/duck.png",
+  "silhouettes/farm/hen.png",
+  "silhouettes/farm/horse.png",
+  "silhouettes/farm/pig.png",
+  "silhouettes/farm/rooster.png",
+  "silhouettes/farm/sheep.png",
+  "silhouettes/flying/bat.png",
+  "silhouettes/flying/eagle.png",
+  "silhouettes/flying/falcon.png",
+  "silhouettes/flying/hummingbird.png",
+  "silhouettes/flying/parrot.png",
+  "silhouettes/flying/seagull.png",
+  "silhouettes/flying/swan.png",
+  "silhouettes/forest/bear.png",
+  "silhouettes/forest/deer.png",
+  "silhouettes/forest/fox.png",
+  "silhouettes/forest/owl.png",
+  "silhouettes/forest/raccoon.png",
+  "silhouettes/forest/squirrel.png",
+  "silhouettes/forest/wolf.png",
+  "silhouettes/ocean/dolphin.png",
+  "silhouettes/ocean/jellyfish.png",
+  "silhouettes/ocean/octopus.png",
+  "silhouettes/ocean/seahorse.png",
+  "silhouettes/ocean/shark.png",
+  "silhouettes/ocean/starfish.png",
+  "silhouettes/ocean/whale.png",
+  "silhouettes/pets/cat.png",
+  "silhouettes/pets/dog.png",
+  "silhouettes/pets/goldfish.png",
+  "silhouettes/pets/hamster.png",
+  "silhouettes/pets/parakeet.png",
+  "silhouettes/pets/rabbit.png",
+  "silhouettes/pets/turtle.png",
+  "silhouettes/wild/elephant.png",
+  "silhouettes/wild/giraffe.png",
+  "silhouettes/wild/hippo.png",
+  "silhouettes/wild/lion.png",
+  "silhouettes/wild/rhinoceros.png",
+  "silhouettes/wild/tiger.png",
+  "silhouettes/wild/zebra.png",
+]);
+
+function getSilhouetteUrl(d: Drawing): string | null {
+  if (!d.line_art_path) return null;
+  const rel = d.line_art_path.replace(/^\/+/, "").replace("line-art/", "silhouettes/");
+  if (AVAILABLE_SILHOUETTES.has(rel)) {
+    return assetUrl(rel);
+  }
+  return null;
+}
 
 function JuegosPage() {
   const poolQ = useQuery({ queryKey: ["drawing-pool"], queryFn: fetchDrawingPool });
@@ -238,43 +298,106 @@ function Memory({ pool }: { pool: Drawing[] }) {
 
 /* ---------- 3. ¿Quién soy? (silueta) ---------- */
 function WhoAmI({ pool }: { pool: Drawing[] }) {
-  const animals = useMemo(() => pool.filter((d) => ANIMAL_RE.test(d.line_art_path ?? "")), [pool]);
+  // Solo láminas que cuentan con silueta real existente
+  const animalsWithSilhouette = useMemo(
+    () => pool.filter((d) => getSilhouetteUrl(d) !== null),
+    [pool],
+  );
+  // Todos los animales para opciones de distracción
+  const allAnimals = useMemo(
+    () => pool.filter((d) => ANIMAL_RE.test(d.line_art_path ?? "")),
+    [pool],
+  );
+
   const [round, setRound] = useState(0);
   const [score, setScore] = useState(0);
   const [solved, setSolved] = useState(false);
   const [wrongId, setWrongId] = useState<string | null>(null);
+  const [imgFallback, setImgFallback] = useState(false);
 
   const { target, options } = useMemo(() => {
-    const s = shuffle(animals);
-    const target = s[0];
-    return { target, options: shuffle([target, ...s.slice(1, 3)]) };
+    const list = animalsWithSilhouette.length >= 3 ? animalsWithSilhouette : allAnimals;
+    const shuffled = shuffle(list);
+    const target = shuffled[0];
+    const poolForDistractors = animalsWithSilhouette.length >= 3 ? animalsWithSilhouette : allAnimals;
+    const distractors = shuffle(poolForDistractors.filter((a) => a.id !== target?.id)).slice(0, 2);
+    return { target, options: shuffle([target, ...distractors].filter(Boolean)) };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [round, animals]);
+  }, [round, animalsWithSilhouette, allAnimals]);
 
-  if (animals.length < 3) return <p className="text-ink-soft">Cargando…</p>;
+  if (!target || options.length < 3) return <p className="text-ink-soft">Cargando…</p>;
 
   function choose(d: Drawing) {
     if (solved) return;
     if (d.id === target.id) {
-      setSolved(true); setScore((s) => s + 1); speakBilingual(target.name_en, target.name_es);
-      setTimeout(() => { setSolved(false); setWrongId(null); setRound((r) => r + 1); }, 1300);
-    } else { setWrongId(d.id); setTimeout(() => setWrongId(null), 500); }
+      setSolved(true);
+      setScore((s) => s + 1);
+      speakBilingual(target.name_en, target.name_es);
+      setTimeout(() => {
+        setSolved(false);
+        setWrongId(null);
+        setImgFallback(false);
+        setRound((r) => r + 1);
+      }, 1400);
+    } else {
+      setWrongId(d.id);
+      setTimeout(() => setWrongId(null), 500);
+    }
   }
+
+  const silhouetteSrc = getSilhouetteUrl(target);
+  const displaySrc = solved
+    ? (assetUrl(target.line_art_path) ?? "")
+    : imgFallback || !silhouetteSrc
+      ? (assetUrl(target.line_art_path) ?? "")
+      : silhouetteSrc;
 
   return (
     <div>
       <Score value={score} />
-      <p className="mb-3 text-center font-display text-lg font-bold text-ink">¿Qué animal es esta sombra?</p>
+      <p className="mb-3 text-center font-display text-lg font-bold text-ink">
+        ¿Qué animal es esta sombra?
+      </p>
       <div className="mx-auto mb-5 grid aspect-square w-48 place-items-center rounded-3xl bg-surface p-4 shadow-soft">
-        <img src={(solved ? assetUrl(target.line_art_path) : silUrl(target)) ?? ""} alt="" className="h-full w-full object-contain transition-all" />
+        <img
+          key={`${target.id}-${solved ? "solved" : "sil"}`}
+          src={displaySrc}
+          alt={solved ? target.name_es : "Sombra misteriosa"}
+          onError={() => {
+            if (!imgFallback) setImgFallback(true);
+          }}
+          className={`h-full w-full object-contain transition-all ${
+            !solved && (imgFallback || !silhouetteSrc) ? "brightness-0" : ""
+          }`}
+        />
       </div>
-      {solved && <p className="mb-3 text-center font-display text-xl font-bold text-secondary">¡Es {target.name_en}! 🎉</p>}
+      {solved && (
+        <p className="mb-3 text-center font-display text-xl font-bold text-secondary">
+          ¡Es {target.name_en} · {target.name_es}! 🎉
+        </p>
+      )}
       <div className="grid grid-cols-3 gap-3">
         {options.map((d) => (
-          <button key={d.id} onClick={() => choose(d)}
-            className={`overflow-hidden rounded-3xl border-4 bg-surface shadow-soft active:scale-95 ${solved && d.id === target.id ? "border-secondary" : wrongId === d.id ? "border-destructive" : "border-transparent"}`}
-            style={wrongId === d.id ? { animation: "wiggle .4s" } : undefined}>
-            <div className="canvas-paper aspect-square"><img src={assetUrl(d.line_art_path) ?? ""} alt="" className="h-full w-full object-contain" /></div>
+          <button
+            key={d.id}
+            onClick={() => choose(d)}
+            aria-label={d.name_es}
+            className={`overflow-hidden rounded-3xl border-4 bg-surface shadow-soft active:scale-95 ${
+              solved && d.id === target.id
+                ? "border-secondary"
+                : wrongId === d.id
+                  ? "border-destructive"
+                  : "border-transparent"
+            }`}
+            style={wrongId === d.id ? { animation: "wiggle .4s" } : undefined}
+          >
+            <div className="canvas-paper aspect-square">
+              <img
+                src={assetUrl(d.line_art_path) ?? ""}
+                alt={d.name_es}
+                className="h-full w-full object-contain p-2"
+              />
+            </div>
           </button>
         ))}
       </div>
